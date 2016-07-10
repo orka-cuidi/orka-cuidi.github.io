@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Orka Blog]]></title>
+  <link href="orka-cuidi.github.io/atom.xml" rel="self"/>
+  <link href="orka-cuidi.github.io/"/>
+  <updated>2016-07-10T09:57:24+08:00</updated>
+  <id>orka-cuidi.github.io/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[零游戏基础开发unity VR游戏]]></title>
+    <link href="orka-cuidi.github.io/14681158247017.html"/>
+    <updated>2016-07-10T09:57:04+08:00</updated>
+    <id>orka-cuidi.github.io/14681158247017.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">协程(Coroutines)</h2>
+
+<p>这是第一个重要的概念，首先协程是Unity特有的处理任务的方式，这些任务随着时间的推移<strong>逐步</strong>执行。从技术上来讲协程不是异步。</p>
+
+<blockquote>
+<p>Coroutine难以理解，原因在于它的设计，可以说是巧妙的利用了一个毫无关系的语法特性（yield）。</p>
+
+<p>理解Coroutine系统，最重要的是yield关键字，很多人被这个关键字迷惑，因为传统的程序里很少见到这个语法，而在Coroutine里面，用的还不是这个关键字的本意。造成了它的字面含义和他做的事情有区别。我们先看看这个关键字的本来作用：yield是用于生成列表（准确地说是枚举器）。</p>
+
+<p>定义一个列表，可以有两种方法，最朴素的就是把它里面的元素全部写出来，比如[1, 2, 3, 4]。传统语言，比如C，Java里面的列表，也只支持这么做。这种方法比较直观，容易理解，但是有些特殊的情况下（比如你想定义一个全部整数的无限长列表），就没法这么做了。枚举（IEnumerable）就是另一种定义的方法，只要我们可以把这个列表里的元素一个一个的列出来，就可以定义这个列表。注意这个“可以”不代表一定要列出，使用这个列表的人也不一定总是需要列表中全部的项。</p>
+
+<p>yield是什么呢？就是C#为了方便编写这种“可以”枚举的列表，引入的关键字。可以yield的函数返回值是一个列表，拿到这个列表的人，每次需要用到列表里的一项时，就会执行这个函数（从函数开始的地方或者上一次yield的地方），当执行过程遇到一个yield的时候，就会暂停当前函数的执行，把这个yield的值返回出去。</p>
+
+<p>Coroutine是什么？你可以把它看作一个“等待”的列表，每次yield，就是等一个事情发生或完成，比如等待一帧、等待下载图片完成、等待加载资源完成等等。然后，会有一个“守望者”，他的任务，就是拿到这样一个列表，取出第一项，等它完成，取出第二项，等它完成……这样一直进行下去直到列表遍历完。在Unity里面，MonoBehaviour.StartCoroutine就是这个“守望者”。</p>
+
+<p>总结一下：<br/>
+    1.  Coroutine是一个列表，列表里是一系列要等待的事情，然后交给MonoBehaviour.StartCoroutine，让它帮你去等。<br/>
+    2.  yield关键字的特点是在生成列表时，到用某一项的时候才去生成某一项。<br/>
+    3.  WWW这个类做的事，是在另一个线程中开始下载一个资源，然后等待这个资源下载完成。</p>
+
+<p>以上3点，大部分时候是同时使用的，所以你觉得概念比较复杂，不妨试着分开理解这三部分。<br/>
+    •   对于Coroutine，你可以不用yield，用List.GetEnumerator方法，也是可以StartCoroutine的。 <br/>
+    •   对于yield，可以去写一些非Coroutine的列表，比如模仿Linq里面的一些方法（Select、Where、Take、Skip）。 <br/>
+    •   对于WWW，你可以试着自己实现兼容Coroutine系统的异步操作。<br/>
+对于这3点分别有一定理解之后，再放在一起看的时候，就会更明白了。</p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+</feed>
